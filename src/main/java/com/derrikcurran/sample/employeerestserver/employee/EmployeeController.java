@@ -54,4 +54,16 @@ public class EmployeeController {
         return ResponseEntity.created(location).body(savedEmployee);
     }
 
+    @PutMapping("{id}")
+    public Employee updateActiveEmployee(@PathVariable long id, @RequestBody Employee employee) {
+        Optional<Employee> existingEmployee = employeeService.findActiveById(id);
+
+        if (existingEmployee.isPresent()) {
+            employee.setId(existingEmployee.get().getId());
+            return employeeService.save(employee);
+        } else {
+            throw new ResourceNotFoundException();
+        }
+    }
+
 }
