@@ -1,5 +1,7 @@
 package com.derrikcurran.sample.employeerestserver.employee;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -26,6 +28,7 @@ public class Employee {
     private LocalDate dateOfEmployment;
 
     @Enumerated(EnumType.STRING)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private EmployeeStatus status = EmployeeStatus.ACTIVE;
 
     public long getId() {
