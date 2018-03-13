@@ -26,7 +26,7 @@ public class Employee {
     private LocalDate dateOfEmployment;
 
     @Enumerated(EnumType.STRING)
-    private EmployeeStatus status;
+    private EmployeeStatus status = EmployeeStatus.ACTIVE;
 
     public long getId() {
         return id;
