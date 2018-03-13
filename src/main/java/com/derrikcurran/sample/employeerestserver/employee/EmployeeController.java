@@ -60,6 +60,7 @@ public class EmployeeController {
 
         if (existingEmployee.isPresent()) {
             employee.setId(existingEmployee.get().getId());
+            employee.setStatus(existingEmployee.get().getStatus());
             return employeeService.save(employee);
         } else {
             throw new ResourceNotFoundException();
