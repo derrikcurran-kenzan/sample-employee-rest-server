@@ -15,8 +15,12 @@ import java.util.Optional;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping
     public Iterable<Employee> getAllActiveEmployees() {

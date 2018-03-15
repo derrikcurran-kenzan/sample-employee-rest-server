@@ -9,29 +9,33 @@ import java.util.Optional;
 @Service
 public class EmployeeService {
 
+    private EmployeeRepository employeeRepository;
+
     @Autowired
-    private EmployeeRepository repository;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
 
     public Iterable<Employee> findAllActive() {
-        return repository.findAllByStatus(EmployeeStatus.ACTIVE);
+        return employeeRepository.findAllByStatus(EmployeeStatus.ACTIVE);
     }
 
     public Optional<Employee> findActiveById(long id) {
-        return repository.findByStatusAndId(EmployeeStatus.ACTIVE, id);
+        return employeeRepository.findByStatusAndId(EmployeeStatus.ACTIVE, id);
     }
 
     public void deactivateById(long id) {
-        Optional<Employee> employee = repository.findById(id);
+        Optional<Employee> employee = employeeRepository.findById(id);
         if (employee.isPresent()) {
             employee.get().setStatus(EmployeeStatus.INACTIVE);
-            repository.save(employee.get());
+            employeeRepository.save(employee.get());
         } else {
             throw new ResourceNotFoundException();
         }
     }
 
     public Employee save(Employee employee) {
-        return repository.save(employee);
+        return employeeRepository.save(employee);
     }
 }

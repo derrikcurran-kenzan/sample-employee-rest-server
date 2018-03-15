@@ -12,8 +12,12 @@ import java.util.Optional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public UserDetailsImpl loadUserById(Long id) throws UserIdNotFoundException {
         Optional<User> user = userRepository.findById(id);

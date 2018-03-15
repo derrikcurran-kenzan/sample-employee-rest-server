@@ -18,14 +18,14 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-    @Autowired
     private SecurityConfig config;
-
-    @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public WebSecurity(SecurityConfig config, UserDetailsServiceImpl userDetailsService) {
+        this.config = config;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,7 +46,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
     private AuthenticationFilter authenticationFilter(String signInUrl) throws Exception {
@@ -66,7 +66,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfig = new CorsConfiguration();
 
         corsConfig.setAllowedOrigins(Arrays.asList(
