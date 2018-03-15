@@ -4,7 +4,7 @@ A sample web application that exposes REST operations for employees.
 
 ## Prerequisites
 
-- JDK 8+.
+- Java 8+.
 - A MySQL database.
 
 ### Database
