@@ -5,7 +5,7 @@ CREATE TABLE employees (
   last_name VARCHAR(50),
   date_of_birth DATE,
   date_of_employment DATE,
-  status VARCHAR(255) DEFAULT 'ACTIVE',
+  status VARCHAR(255) NOT NULL DEFAULT 'ACTIVE',
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
