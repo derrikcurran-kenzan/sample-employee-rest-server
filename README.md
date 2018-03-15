@@ -25,13 +25,17 @@ mysql/mysql-server:latest
 
 The Docker container can be stopped and removed via `docker rm -f mysql_sample`.
 
-## Build
-
-`./mvnw package`
-
 ## Run
 
-`java -jar target/sample-employee-rest-server-0.0.1-SNAPSHOT.jar`
+`./mvnw spring-boot:run`
+
+## Tests\
+
+`./mvnw test`
+
+## Build JAR
+
+`./mvnw package`
 
 ## Usage
 
