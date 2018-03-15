@@ -7,6 +7,6 @@ import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
-    Optional<Employee> findByStatusAndId(EmployeeStatus status, Long id);
+    Optional<Employee> findByStatusAndId(EmployeeStatus status, long id);
     Iterable<Employee> findAllByStatus(EmployeeStatus status);
 }

@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public UserDetailsImpl loadUserById(Long id) throws UserIdNotFoundException {
+    public UserDetailsImpl loadUserById(long id) throws UserIdNotFoundException {
         Optional<User> user = userRepository.findById(id);
 
         if (!user.isPresent()) {

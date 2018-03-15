@@ -56,7 +56,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
                 .getSubject();
 
             if (subject != null) {
-                Long userId = Long.parseLong(subject);
+                long userId = Long.parseLong(subject);
                 UserDetailsImpl user = userDetailsService.loadUserById(userId);
                 if (user != null) {
                     authentication = new UsernamePasswordAuthenticationToken(

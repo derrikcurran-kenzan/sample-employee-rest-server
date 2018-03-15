@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private Long id;
+    private long id;
     private String username;
     private String password;
     private List<GrantedAuthority> authorities;
@@ -22,7 +22,7 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = new ArrayList<>();
     }
 
-    Long getId() {
+    long getId() {
         return id;
     }
 
