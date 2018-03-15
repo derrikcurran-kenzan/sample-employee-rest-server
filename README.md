@@ -23,7 +23,7 @@ docker run -d \
 mysql/mysql-server:latest
 ```
 
-The container can be stopped and removed via `docker rm -f mysql_sample`.
+The Docker container can be stopped and removed via `docker rm -f mysql_sample`.
 
 ## Build
 
@@ -32,3 +32,52 @@ The container can be stopped and removed via `docker rm -f mysql_sample`.
 ## Run
 
 `java -jar target/sample-employee-rest-server-0.0.1-SNAPSHOT.jar`
+
+## Usage
+
+### Authentication
+
+Requests to secure endpoints require an authorization header with a valid access token, like this:
+
+`Authorization: Bearer {token}`
+
+To get a token, send a POST request to `/auth/sign-in` with the following JSON body:
+
+```json
+{
+  "Username": "admin",
+  "Password": "admin"
+}
+```
+
+The above `admin:admin` user is created automatically on DB initialization and can be used to request a token.
+
+### Employees
+
+#### Spec
+
+```json
+{
+  "ID": 1,
+  "FirstName": "Jane",
+  "MiddleInitial": "J",
+  "LastName": "Doe",
+  "DateOfBirth": "1988-06-20",
+  "DateOfEmployment": "2016-02-15",
+  "Status": "ACTIVE"
+}
+```
+
+- FirstName is required.
+- Status can be either ACTIVE or INACTIVE.
+- Only active employees are exposed by the API.
+
+#### Endpoints
+
+| Method | URI             | Description                              | Access              |
+|--------|-----------------|------------------------------------------|---------------------|
+| GET    | /employees      | Get all active employees.                | Public              |
+| GET    | /employees/{id} | Get an active employee by ID.            | Public              |
+| POST   | /employees      | Create an employee.                      | Public              |
+| PUT    | /employess/{id} | Update an active employee by ID.         | Public              |
+| DELETE | /employees/{id} | Change an employee's status to INACTIVE. | Authenticated Users |
