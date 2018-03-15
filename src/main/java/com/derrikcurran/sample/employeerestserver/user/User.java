@@ -10,12 +10,13 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value="ID", access = JsonProperty.Access.READ_ONLY)
     private long id;
 
+    @JsonProperty("Username")
     private String username;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value="Password", access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     public long getId() {

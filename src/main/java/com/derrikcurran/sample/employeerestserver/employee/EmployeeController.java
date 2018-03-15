@@ -66,5 +66,4 @@ public class EmployeeController {
             throw new ResourceNotFoundException();
         }
     }
-
 }

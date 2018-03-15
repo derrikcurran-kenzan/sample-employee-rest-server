@@ -13,23 +13,29 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value="ID", access = JsonProperty.Access.READ_ONLY)
     private long id;
 
     @NotBlank
     @Size(max = 50)
+    @JsonProperty("FirstName")
     private String firstName;
 
+    @JsonProperty("MiddleInitial")
     private Character middleInitial;
 
     @Size(max = 50)
+    @JsonProperty("LastName")
     private String lastName;
 
+    @JsonProperty("DateOfBirth")
     private LocalDate dateOfBirth;
+
+    @JsonProperty("DateOfEmployment")
     private LocalDate dateOfEmployment;
 
     @Enumerated(EnumType.STRING)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value="Status", access = JsonProperty.Access.READ_ONLY)
     private EmployeeStatus status = EmployeeStatus.ACTIVE;
 
     public long getId() {
@@ -87,5 +93,4 @@ public class Employee {
     public void setStatus(EmployeeStatus status) {
         this.status = status;
     }
-
 }
