@@ -29,7 +29,7 @@ The Docker container can be stopped and removed via `docker rm -f mysql_sample`.
 
 `./mvnw spring-boot:run`
 
-## Tests\
+## Tests
 
 `./mvnw test`
 
