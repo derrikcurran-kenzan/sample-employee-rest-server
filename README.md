@@ -20,7 +20,7 @@ docker run -d \
 -e MYSQL_PASSWORD=pw_sampledb \
 -p 3306:3306 \
 --name=mysql_sample \
-mysql/mysql-server:latest
+mysql/mysql-server:5.7
 ```
 
 The Docker container can be stopped and removed via `docker rm -f mysql_sample`.
