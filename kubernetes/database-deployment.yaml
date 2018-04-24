@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employees-database
+  labels:
+    app: employees
+spec:
+  selector:
+    matchLabels:
+      app: employees
+      tier: database
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: employees
+        tier: database
+    spec:
+      containers:
+      - name: employees-database
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: pw_sampledb
+        - name: MYSQL_DATABASE
+          value: sampledb
+        - name: MYSQL_USER
+          value: user_sampledb
+        - name: MYSQL_PASSWORD
+          value: pw_sampledb
+        volumeMounts:
+        - name: employees-database-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: employees-database-persistent-storage
+        persistentVolumeClaim:
+          claimName: employees-database-pv-claim

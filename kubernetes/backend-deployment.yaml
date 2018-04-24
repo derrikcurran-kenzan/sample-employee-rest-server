@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employees-backend
+spec:
+  selector:
+    matchLabels:
+      app: employees
+      tier: backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: employees
+        tier: backend
+    spec:
+      containers:
+      - name: employees-backend
+        image: employees-backend:current
+        args: ["--spring.datasource.url=jdbc:mysql://employees-database:3306/sampledb"]
+        ports:
+        - containerPort: 8081
