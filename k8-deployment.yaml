@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employees-database
+spec:
+  selector:
+    matchLabels:
+      app: employees
+      tier: database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: employees
+        tier: database
+    spec:
+      containers:
+      - name: employees-database
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: pw_sampledb
+        - name: MYSQL_DATABASE
+          value: sampledb
+        - name: MYSQL_USER
+          value: user_sampledb
+        - name: MYSQL_PASSWORD
+          value: pw_sampledb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: employees-database
+spec:
+  type: NodePort
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: 3306
+    protocol: TCP
+  selector:
+    app: employees
+    tier: database
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employees-backend
+spec:
+  selector:
+    matchLabels:
+      app: employees
+      tier: backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: employees
+        tier: backend
+    spec:
+      containers:
+      - name: employees-backend
+        image: employees-backend:current
+        args: ["--spring.datasource.url=jdbc:mysql://employees-database:3306/sampledb"]
+        ports:
+        - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: employees-backend
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 8081
+    targetPort: 8081
+    protocol: TCP
+  selector:
+    app: employees
+    tier: backend
