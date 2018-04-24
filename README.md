@@ -50,7 +50,7 @@ kubectl create -f k8-deployment.yaml
 
 ### Access via Kubernetes Proxy:
 
-Run `kubectl proxy --port=8080`, and service will be accessible at [http://localhost:8080/api/v1/namespaces/default/services/employees-backend:http/proxy/employees].
+Run `kubectl proxy --port=8080`, and service will be accessible at <http://localhost:8080/api/v1/namespaces/default/services/employees-backend:http/proxy/employees>.
 
 
 ## Usage
