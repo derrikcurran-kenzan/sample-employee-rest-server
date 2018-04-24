@@ -45,7 +45,7 @@ This assumes you're using Minikube and includes a MySQL server deployment.
 eval $(minikube docker-env) && \
 ./mvnw package -DskipTests && \
 docker build --tag employees-backend:current . && \
-kubectl create -f kubernetes/
+kubectl create --recursive -f kubernetes/
 ```
 
 ### Access via Kubernetes Proxy:
