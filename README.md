@@ -35,7 +35,23 @@ The Docker container can be stopped and removed via `docker rm -f mysql_sample`.
 
 ## Build JAR
 
-`./mvnw package`
+`./mvnw package -DskipTests`
+
+## Deploy to Local Kubernetes Node
+
+This assumes you're using Minikube and includes a MySQL server deployment.
+
+```
+eval $(minikube docker-env) && \
+./mvnw package -DskipTests && \
+docker build --tag employees-backend:current . && \
+kubectl create -f k8-deployment.yaml
+```
+
+### Access via Kubernetes Proxy:
+
+Run `kubectl proxy --port=8080`, and service will be accessible at [http://localhost:8080/api/v1/namespaces/default/services/employees-backend:http/proxy/employees].
+
 
 ## Usage
 
@@ -85,3 +101,11 @@ The above `admin:admin` user is created automatically on DB initialization and c
 | POST   | /employees      | Create an employee.                      | Public              |
 | PUT    | /employess/{id} | Update an active employee by ID.         | Public              |
 | DELETE | /employees/{id} | Change an employee's status to INACTIVE. | Authenticated Users |
+
+### Admin
+
+#### Endpoints
+
+| Method | URI             | Description                              | Access              |
+|--------|-----------------|------------------------------------------|---------------------|
+| GET    | /admin/network  | Get local IP and hostname.               | Public              |
