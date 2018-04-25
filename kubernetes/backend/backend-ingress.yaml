@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: employees-backend
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: employees.mk.localhost.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: employees-backend
+          servicePort: 8081
